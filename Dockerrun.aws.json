@@ -1,0 +1,24 @@
+{
+  "AWSEBDockerrunVersion": 2,
+
+  "containerDefinitions": [
+    {
+      "name": "shreeya-full-stack-professional-api",
+      "image": "shreeya2909/shreeya-full-stack-professional-api:latest",
+      "essential": true,
+      "memory": 512,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 8080
+        }
+      ],
+      "environment": [
+        {
+          "name": "SPRING_DATASOURCE_URL",
+         "value":  "jdbc:postgresql://awseb-e-8cauusepmb-stack-awsebrdsdatabase-ucmx3uvbc3qt.chekaqcmeg3v.ap-south-1.rds.amazonaws.com:5432/customer"
+        }
+      ]
+    }
+  ]
+}
