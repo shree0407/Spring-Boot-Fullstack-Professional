@@ -19,6 +19,8 @@
 		<docker.username>shreeya2909</docker.username>
 		<docker.image.name>shreeya-full-stack-professional-api</docker.image.name>
 		<docker.image.tag>1.0.0</docker.image.tag>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
 	</properties>
 
 
