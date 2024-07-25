@@ -21,6 +21,8 @@ public class Main {
         //Should never do like this
 
 
+
+
     }
 
     @Bean
