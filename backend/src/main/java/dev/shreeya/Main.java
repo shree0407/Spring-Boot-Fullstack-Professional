@@ -20,9 +20,7 @@ public class Main {
         // CustomerController customerControllers = new CustomerController(customerService);
         //Should never do like this
 
-
-
-
+        //test
     }
 
     @Bean
