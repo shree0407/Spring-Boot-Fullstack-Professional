@@ -18,7 +18,7 @@
 		<java.version>17</java.version>
 		<docker.username>shreeya2909</docker.username>
 		<docker.image.name>shreeya-full-stack-professional-api</docker.image.name>
-		<docker.image.tag>1.0.0</docker.image.tag>
+		<docker.image.tag/>
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>
 	</properties>
@@ -193,7 +193,7 @@
 					</from>
 					<!-- Where we want to push our img : Our DockerHub account -->
 					<to>
-						<image>docker.io/${docker.username}/${docker.image.name}:${project.version}</image>
+						<image>docker.io/${docker.username}/${docker.image.name}:${docker.image.tag}</image>
 						<tags>
 							<tag>latest</tag>
 						</tags>
