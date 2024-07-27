@@ -31,6 +31,23 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+      - name: First message when CD workflow starts
+        run: >
+          curl -X POST -H 'Content-type: application/json' 
+          --data '{"text":"Starting.....Backend Spring Deployment :spring_boot:"}' 
+          ${{ secrets.SLACK_WEBHOOK_URL }}
+
+      - name: Send Slack Commit Message And SHA
+        run: >
+            curl -X POST -H 'Content-type: application/json' 
+            --data '{"text":":github: https://github.com/shreeya2906/Spring-Boot-Fullstack-Professional/commit/${{ github.sha }} - ${{ github.event.head_commit.message }}"}' 
+            ${{ secrets.SLACK_WEBHOOK_URL }}
+
+      - name: Send Slack Message
+        run: >
+            curl -X POST -H 'Content-type: application/json' 
+            --data '{"text":"Deployment started :progress_bar: :fingerscrossed:"}' 
+            ${{ secrets.SLACK_WEBHOOK_URL }}
       - uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
@@ -46,8 +63,22 @@ jobs:
       - name: Set build number
         id: build-number
         run: echo "BUILD_NUMBER=$(date '+%d.%m.%Y.%H.%M.%S')" >> $GITHUB_OUTPUT
+
+      - name: Send Slack Message
+        run: >
+            curl -X POST -H 'Content-type: application/json' 
+            --data '{"text":":apache_maven: Building with Maven"}' 
+            ${{ secrets.SLACK_WEBHOOK_URL }}
+      
+
       - name: Build Package Push with Maven
         run: mvn -ntp -B verify -D docker.image.tag=${{steps.build-number.outputs.BUILD_NUMBER}} jib:build
+
+      - name: Send Slack Message
+        run: >
+            curl -X POST -H 'Content-type: application/json' 
+            --data '{"text":":shydocker: Image tag:${{ steps.build-number.outputs.BUILD_NUMBER }} pushed to DockerHub - https://hub.docker.com/repository/docker/shreeya2909/shreeya-full-stack-professional-api/"}' 
+            ${{ secrets.SLACK_WEBHOOK_URL }}
 
       - name: Update Dockerrun.aws.json api image tag with new build number
         run: |
@@ -56,6 +87,12 @@ jobs:
           sed -i -E 's_(shreeya2909/shreeya-full-stack-professional-api:)([^"]*)_\1'${{steps.build-number.outputs.BUILD_NUMBER}}'_' ../Dockerrun.aws.json
           echo "Dockerrun.aws.json after updating tag"
           cat ../Dockerrun.aws.json
+
+      - name: Send Slack Message
+        run: >
+          curl -X POST -H 'Content-type: application/json' 
+          --data '{"text":":aws: Starting Deployment to Elastic Beanstalk :progress_bar:"}' 
+          ${{ secrets.SLACK_WEBHOOK_URL }}
 
       - name: Deploy to Elastic Beanstalk
         uses: einaregilsson/beanstalk-deploy@v22
@@ -69,6 +106,12 @@ jobs:
          region: ${{ secrets.EB_REGION }}
          deployment_package: Dockerrun.aws.json
 
+      - name: Send Slack Message
+        run: >
+            curl -X POST -H 'Content-type: application/json' 
+            --data '{"text":":githubloading: Committing to repo https://github.com/shreeya2906/Spring-Boot-Fullstack-Professional/"}' 
+            ${{ secrets.SLACK_WEBHOOK_URL }}
+
       - name: commit and push Dockerrun.aws.json
         run: |
           git config user.name github-actions
@@ -76,3 +119,17 @@ jobs:
           git add ../Dockerrun.aws.json
           git commit -m "Update Dockerrun.aws.json docker image with new tag ${{ steps.build-number.outputs.BUILD_NUMBER }}"
           git push
+          
+
+      - name: Send Slack Message
+        run: >
+          curl -X POST -H 'Content-type: application/json' 
+          --data '{"text":"Deployment and commit completed :fallout-checkmark: :party_blob-1:"}' 
+          ${{ secrets.SLACK_WEBHOOK_URL }}
+
+      - name: Send Slack Message
+        if: always()
+        run: >
+          curl -X POST -H 'Content-type: application/json' 
+          --data '{"text":"Job Status ${{ job.status }}"}' 
+          ${{ secrets.SLACK_WEBHOOK_URL }}
