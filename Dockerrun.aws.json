@@ -4,7 +4,7 @@
   "containerDefinitions": [
     {
       "name": "shreeya-full-stack-professional-api",
-      "image": "shreeya2909/shreeya-full-stack-professional-api:27.07.2024.06.18.50",
+      "image": "shreeya2909/shreeya-full-stack-professional-api:27.07.2024.11.27.45",
       "essential": true,
       "memory": 512,
       "portMappings": [
