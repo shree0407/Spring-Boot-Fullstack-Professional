@@ -34,7 +34,7 @@ jobs:
       - name: First message when CD workflow starts
         run: >
           curl -X POST -H 'Content-type: application/json' 
-          --data '{"text":"Starting.....Backend Spring Deployment :spring_boot:"}' 
+          --data '{"text":"Starting.....Backend Spring Deployment :spring-boot:"}' 
           ${{ secrets.SLACK_WEBHOOK_URL }}
 
       - name: Send Slack Commit Message And SHA
@@ -124,7 +124,7 @@ jobs:
       - name: Send Slack Message
         run: >
           curl -X POST -H 'Content-type: application/json' 
-          --data '{"text":"Deployment and commit completed :fallout-checkmark: :party_blob-1:"}' 
+          --data '{"text":"Deployment and commit completed :fallout-checkmark: :party_blob:"}' 
           ${{ secrets.SLACK_WEBHOOK_URL }}
 
       - name: Send Slack Message
