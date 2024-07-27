@@ -19,6 +19,9 @@ public class Main {
         // CustomerService customerService= new CustomerService(new CustomerListDataAccessService());
         // CustomerController customerControllers = new CustomerController(customerService);
         //Should never do like this
+
+
+
     }
 
     @Bean
