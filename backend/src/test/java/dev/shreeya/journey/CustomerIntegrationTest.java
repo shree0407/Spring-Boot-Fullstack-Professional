@@ -206,7 +206,6 @@ public class CustomerIntegrationTest {
 
 
         //update customer
-
         String name = "Shreeya";
         CustomerUpdateRequest updateRequest = new CustomerUpdateRequest(
                 name, null ,null

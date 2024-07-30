@@ -39,6 +39,7 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestcontainers {
         List<Customer> actual = underTest.selectAllCustomer();
 
         //Then
+
         assertThat(actual).isNotEmpty();
     }
 

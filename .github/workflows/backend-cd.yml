@@ -34,13 +34,13 @@ jobs:
       - name: First message when CD workflow starts
         run: >
           curl -X POST -H 'Content-type: application/json' 
-          --data '{"text":"Starting.....Backend Spring Deployment :spring-boot:"}' 
+          --data '{"text":":start: :nyancat_big:Starting.....Backend Spring Deployment :cool-doge:"}' 
           ${{ secrets.SLACK_WEBHOOK_URL }}
 
       - name: Send Slack Commit Message And SHA
         run: >
             curl -X POST -H 'Content-type: application/json' 
-            --data '{"text":":github: https://github.com/shreeya2906/Spring-Boot-Fullstack-Professional/commit/${{ github.sha }} - ${{ github.event.head_commit.message }}"}' 
+            --data '{"text":":party-github: https://github.com/shreeya2906/Spring-Boot-Fullstack-Professional/commit/${{ github.sha }} - ${{ github.event.head_commit.message }}"}' 
             ${{ secrets.SLACK_WEBHOOK_URL }}
 
       - name: Send Slack Message
@@ -60,6 +60,12 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
 
+      - name: Send Slack Message
+        run: >
+          curl -X POST -H 'Content-type: application/json' 
+          --data '{"text":"Docker Login successful :success:"}' 
+          ${{ secrets.SLACK_WEBHOOK_URL }}
+
       - name: Set build number
         id: build-number
         run: echo "BUILD_NUMBER=$(date '+%d.%m.%Y.%H.%M.%S')" >> $GITHUB_OUTPUT
@@ -67,7 +73,7 @@ jobs:
       - name: Send Slack Message
         run: >
             curl -X POST -H 'Content-type: application/json' 
-            --data '{"text":":apache_maven: Building with Maven"}' 
+            --data '{"text":":maven: Building with Maven"}' 
             ${{ secrets.SLACK_WEBHOOK_URL }}
       
 
@@ -91,7 +97,7 @@ jobs:
       - name: Send Slack Message
         run: >
           curl -X POST -H 'Content-type: application/json' 
-          --data '{"text":":aws: Starting Deployment to Elastic Beanstalk :progress_bar:"}' 
+          --data '{"text":":aws: Starting Deployment to Elastic Beanstalk :loading:"}' 
           ${{ secrets.SLACK_WEBHOOK_URL }}
 
       - name: Deploy to Elastic Beanstalk
@@ -131,5 +137,7 @@ jobs:
         if: always()
         run: >
           curl -X POST -H 'Content-type: application/json' 
-          --data '{"text":"Job Status ${{ job.status }}"}' 
+          --data '{"text":"Job Status ${{ job.status }} :bluetick:"}' 
           ${{ secrets.SLACK_WEBHOOK_URL }}
+          
+      
