@@ -31,6 +31,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+
       - name: First message when CD workflow starts
         run: >
           curl -X POST -H 'Content-type: application/json' 
