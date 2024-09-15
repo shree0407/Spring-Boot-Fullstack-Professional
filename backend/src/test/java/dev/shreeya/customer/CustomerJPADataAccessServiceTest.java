@@ -60,7 +60,7 @@ class CustomerJPADataAccessServiceTest {
         Faker faker = new Faker();// -> no need to use this everytime if it extends abstract TestContainer
         Customer customer = new Customer(faker.name().fullName(),
                 faker.internet().safeEmailAddress(),
-                25);
+                25, Gender.MALE);
 
 
         //When
@@ -113,8 +113,8 @@ class CustomerJPADataAccessServiceTest {
         Customer customer = new Customer(
                 faker.name().fullName(),
                 faker.internet().safeEmailAddress(),
-                67
-        );
+                67,
+                Gender.MALE);
 
         // When
         underTest.updateCustomer(customer);
