@@ -102,6 +102,8 @@ public class CustomerIntegrationTest {
 
     }
 
+
+
     @Test
     void canDeleteCustomer() {
         //create registration request
